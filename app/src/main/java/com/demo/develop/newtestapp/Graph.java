@@ -2,6 +2,7 @@ package com.demo.develop.newtestapp;
 
 
 import android.app.Activity;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Typeface;
@@ -39,7 +40,7 @@ public class Graph extends Activity {
 
             @Override
             public void onClick(View v) {
-// Draw the Income vs Expense Chart
+// Draw the Income Chart
                 openChart();
             }
         };
@@ -54,9 +55,8 @@ public class Graph extends Activity {
         int[] income = { 2000,2500,2700,3000,2800,3500,3700,3800, 0,0,0,0};
 
 // Creating an XYSeries for Income
-        XYSeries incomeSeries = new XYSeries("Income");
-// Creating an XYSeries for Expense
-// Adding data to Income and Expense Series
+        XYSeries incomeSeries = new XYSeries("Date and time");
+// Adding data to Income Serie
         for(int i=0;i<x.length;i++){
             incomeSeries.add(i,income[i]);
         }
@@ -65,7 +65,6 @@ public class Graph extends Activity {
         XYMultipleSeriesDataset dataset = new XYMultipleSeriesDataset();
 // Adding Income Series to the dataset
         dataset.addSeries(incomeSeries);
-// Adding Expense Series to dataset
 
 // Creating XYSeriesRenderer to customize incomeSeries
         XYSeriesRenderer incomeRenderer = new XYSeriesRenderer();

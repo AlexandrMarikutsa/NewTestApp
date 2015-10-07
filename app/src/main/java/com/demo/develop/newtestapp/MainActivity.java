@@ -32,6 +32,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
 
     private DBHelper dbHelper;
 
+
     private List<Button> buttons;
 
     @Override
@@ -45,16 +46,19 @@ public class MainActivity extends Activity implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
+//        Dao dao = new Dao(dbHelper);
         ContentValues cv = new ContentValues();
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         switch (v.getId()) {
             case R.id.save_button:
+//                String text = enterText.getText().toString();
                 Log.d(LOG_TAG, "--- Insert in testTable: ---");
                 cv.put("rating", rating);
                 cv.put("text", enterText.getText().toString());
                 Calendar calendar = Calendar.getInstance();
                 cv.put("timeStamp",calendar.getTimeInMillis());
                 enterText.getText().clear();
+//                dao.save(rating,text);
                 long rowID = db.insert("testTable", null, cv);
                 Log.d(LOG_TAG, "row inserted, ID = " + rowID);
                 rating = 0;
