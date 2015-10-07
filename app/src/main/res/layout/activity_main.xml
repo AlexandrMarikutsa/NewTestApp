@@ -41,6 +41,7 @@
 
     <LinearLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/all_buttons"
         android:orientation="vertical"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -131,5 +132,15 @@
         </LinearLayout>
 
     </LinearLayout>
+
+    <EditText
+        android:layout_height="wrap_content"
+        android:id="@+id/edit_text"
+        android:hint="Enter your text"
+        android:layout_width="match_parent"
+        android:layout_below="@+id/all_buttons"
+        android:layout_marginTop="30dp"
+        android:gravity="center_horizontal">
+    </EditText>
 
 </RelativeLayout>
