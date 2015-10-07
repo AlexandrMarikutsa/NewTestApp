@@ -3,6 +3,7 @@ package com.demo.develop.newtestapp;
 import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -142,6 +143,13 @@ public class MainActivity extends Activity implements View.OnClickListener {
         enterText.setOnClickListener(this);
         btnRead.setOnClickListener(this);
         btnDelete.setOnClickListener(this);
+        graph.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplication(), LineChartActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
 }
