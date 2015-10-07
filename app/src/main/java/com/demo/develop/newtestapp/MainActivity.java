@@ -49,40 +49,30 @@ public class MainActivity extends Activity implements View.OnClickListener {
         switch (v.getId()) {
             case R.id.save_button:
                 Log.d(LOG_TAG, "--- Insert in testTable: ---");
-                // подготовим данные для вставки в виде пар: наименование столбца - значение
                 cv.put("rating", rating);
                 cv.put("text", enterText.getText().toString());
                 Calendar calendar = Calendar.getInstance();
                 cv.put("timeStamp",calendar.getTimeInMillis());
-                // вставляем запись и получаем ее ID
+                enterText.getText().clear();
                 long rowID = db.insert("testTable", null, cv);
                 Log.d(LOG_TAG, "row inserted, ID = " + rowID);
                 rating = 0;
                 break;
             case R.id.btnRead:
                 Log.d(LOG_TAG, "--- Rows in testTable: ---");
-                // делаем запрос всех данных из таблицы testTable, получаем Cursor
                 Cursor c = db.query("testTable", null, null, null, null, null, null);
-
-                // ставим позицию курсора на первую строку выборки
-                // если в выборке нет строк, вернется false
                 if (c.moveToFirst()) {
-
-                    // определяем номера столбцов по имени в выборке
                     int idColIndex = c.getColumnIndex("id");
                     int ratingColIndex = c.getColumnIndex("rating");
                     int textColIndex = c.getColumnIndex("text");
                     int timeStamp = c.getColumnIndex("timeStamp");
 
                     do {
-                        // получаем значения по номерам столбцов и пишем все в лог
                         Log.d(LOG_TAG,
                                 "ID = " + c.getInt(idColIndex) +
                                         ", ratingColIndex = " + c.getString(ratingColIndex) +
                                         ", textColIndex = " + c.getString(textColIndex) +
-                                        ",ratingColIndex = " + c.getString(ratingColIndex));
-                        // переход на следующую строку
-                        // а если следующей нет (текущая - последняя), то false - выходим из цикла
+                                        ",timeStamp = " + c.getString(timeStamp));
                     } while (c.moveToNext());
                 } else
                     Log.d(LOG_TAG, "0 rows");
@@ -90,12 +80,10 @@ public class MainActivity extends Activity implements View.OnClickListener {
                 break;
             case R.id.btnDelete:
                 Log.d(LOG_TAG, "--- Clear testTable: ---");
-                // удаляем все записи
                 int clearCount = db.delete("testTable", null, null);
                 Log.d(LOG_TAG, "deleted rows count = " + clearCount);
                 break;
         }
-        // закрываем подключение к БД
         dbHelper.close();
     }
 
@@ -103,9 +91,6 @@ public class MainActivity extends Activity implements View.OnClickListener {
 
         public DBHelper(Context context) {
             super(context, "myDB", null, 1);
-//
-
-//
         }
 
         @Override
