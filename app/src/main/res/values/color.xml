@@ -2,4 +2,5 @@
 <resources>
     <color name="toolbar_background">#CCE5ED</color>
     <color name="toolbar_button_background">#7AB2C4</color>
+    <color name="transparent_background">#00FF0000</color>
 </resources>
