@@ -12,18 +12,21 @@
         android:minHeight="?attr/actionBarSize"
         android:background="@color/toolbar_background">
 
+        <Button
+            android:layout_width="@dimen/toolbar_button_width"
+            android:layout_height="wrap_content"
+            android:text="@string/button_graph_name"
+            android:id="@+id/graph"
+            android:layout_marginBottom="3dp"
+            android:layout_marginLeft="3dp"
+            android:layout_marginRight="3dp"
+            android:layout_marginTop="3dp"
+            android:layout_gravity="right"
+            android:background="@color/toolbar_button_background"
+            android:textSize="@dimen/toolbar_button_text_size"
+            android:layout_alignParentEnd="false"
+            android:layout_alignParentRight="true"
+            android:layout_alignRight="@+id/toolbar" />
     </android.support.v7.widget.Toolbar>
-
-    <Button
-        android:layout_width="@dimen/toolbar_button_width"
-        android:layout_height="41dp"
-        android:text="@string/button_graph_name"
-        android:id="@+id/graph"
-        android:background="#7AB2C4"
-        android:textSize="@dimen/toolbar_button_text_size"
-        android:layout_alignParentEnd="false"
-        android:layout_alignParentRight="false"
-        android:layout_alignRight="@+id/toolbar"
-        android:layout_margin="2dp" />
 
 </RelativeLayout>
