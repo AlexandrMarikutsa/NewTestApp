@@ -7,4 +7,9 @@
     <dimen name="toolbar_button_text_size">10sp</dimen>
     <dimen name="central_text_size">50sp</dimen>
     <dimen name="central_text_view_layout_margin_top">30dp</dimen>
+    <dimen name="toolbar_button_margin">3dp</dimen>
+    <dimen name="layout_with_all_buttons_margin_top">15dp</dimen>
+    <dimen name="central_buttons_text_size">18sp</dimen>
+    <dimen name="edit_text_layout_margin_top">30dp</dimen>
+    <dimen name="button_save_layout_margin_top">20dp</dimen>
 </resources>
