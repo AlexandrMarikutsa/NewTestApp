@@ -15,6 +15,6 @@
     <string name="button_7_text">7</string>
     <string name="button_8_text">8</string>
     <string name="button_9_text">9</string>
-    <string name="button_0_text">0</string>
+    <string name="button_10_text">10</string>
     <string name="edit_text_hint">Enter your text</string>
 </resources>

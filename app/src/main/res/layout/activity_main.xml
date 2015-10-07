@@ -55,6 +55,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/first_row_buttons">
             <Button
+                android:id="@+id/btn1"
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"
                 android:layout_weight="1"
@@ -62,6 +63,7 @@
                 android:textSize="@dimen/central_buttons_text_size">
             </Button>
             <Button
+                android:id="@+id/btn2"
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"
                 android:layout_weight="1"
@@ -69,6 +71,7 @@
                 android:textSize="@dimen/central_buttons_text_size">
             </Button>
             <Button
+                android:id="@+id/btn3"
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"
                 android:layout_weight="1"
@@ -76,6 +79,7 @@
                 android:textSize="@dimen/central_buttons_text_size">
             </Button>
             <Button
+                android:id="@+id/btn4"
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"
                 android:layout_weight="1"
@@ -83,6 +87,7 @@
                 android:textSize="@dimen/central_buttons_text_size">
             </Button>
             <Button
+                android:id="@+id/btn5"
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"
                 android:layout_weight="1"
@@ -95,6 +100,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/second_row_buttons">
             <Button
+                android:id="@+id/btn6"
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"
                 android:layout_weight="1"
@@ -102,6 +108,7 @@
                 android:textSize="@dimen/central_buttons_text_size">
             </Button>
             <Button
+                android:id="@+id/btn7"
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"
                 android:layout_weight="1"
@@ -109,6 +116,7 @@
                 android:textSize="@dimen/central_buttons_text_size">
             </Button>
             <Button
+                android:id="@+id/btn8"
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"
                 android:layout_weight="1"
@@ -116,6 +124,7 @@
                 android:textSize="@dimen/central_buttons_text_size">
             </Button>
             <Button
+                android:id="@+id/btn9"
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"
                 android:layout_weight="1"
@@ -123,10 +132,11 @@
                 android:textSize="@dimen/central_buttons_text_size">
             </Button>
             <Button
+                android:id="@+id/btn10"
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"
                 android:layout_weight="1"
-                android:text="@string/button_0_text"
+                android:text="@string/button_10_text"
                 android:textSize="@dimen/central_buttons_text_size">
             </Button>
         </LinearLayout>
@@ -154,4 +164,26 @@
         android:layout_alignParentRight="false"
         android:layout_marginTop="@dimen/button_save_layout_margin_top" />
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/databaseEdite"
+        android:layout_below="@+id/save_button">
+        <Button
+            android:id="@+id/btnRead"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:text="Read"
+            android:textSize="@dimen/central_buttons_text_size">
+        </Button>
+        <Button
+            android:id="@+id/btnDelete"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:text="Delete"
+            android:textSize="@dimen/central_buttons_text_size">
+        </Button>
+    </LinearLayout>
 </RelativeLayout>
