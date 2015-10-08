@@ -62,7 +62,7 @@ public class Graph extends Activity {
         XYMultipleSeriesDataset dataset = new XYMultipleSeriesDataset();
         dataset.addSeries(incomeSeries);
         XYSeriesRenderer incomeRenderer = new XYSeriesRenderer();
-        incomeRenderer.setColor(Color.CYAN); //color of the graph set to cyan
+        incomeRenderer.setColor(Color.CYAN);
         incomeRenderer.setFillPoints(true);
         incomeRenderer.setLineWidth(2f);
         incomeRenderer.setDisplayChartValues(true);
@@ -114,9 +114,9 @@ public class Graph extends Activity {
     }
 
     private String makeDateAndTimeFormat(int timeStamp){
-        long dv = new Long(timeStamp);
-        Date df = new java.util.Date(dv);
-        String vv = new SimpleDateFormat("dd.MM\nHH:mm").format(df);
-        return vv;
+        long timeMilis = new Long(timeStamp);
+        Date date = new java.util.Date(timeMilis);
+        String dateFormat = new SimpleDateFormat("dd.MM\nHH:mm").format(date);
+        return dateFormat;
     }
 }
