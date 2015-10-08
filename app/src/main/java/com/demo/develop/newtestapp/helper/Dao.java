@@ -6,6 +6,8 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
+import com.demo.develop.newtestapp.classes.Click;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -21,8 +23,8 @@ public class Dao {
         db = dbHelper.getWritableDatabase();
     }
 
-    public List<Integer> readAll(){
-        List<Integer> clickTimes = new ArrayList<>();
+    public List<Click> readAll(){
+        List<Click> clicks = new ArrayList<>();
         Log.d(LOG_TAG, "--- Rows in testTable: ---");
         Cursor c = db.query("testTable", null, null, null, null, null, null);
         if (c.moveToFirst()) {
@@ -36,12 +38,12 @@ public class Dao {
                                 ", ratingColIndex = " + c.getString(ratingColIndex) +
                                 ", textColIndex = " + c.getString(textColIndex) +
                                 ",timeStamp = " + c.getString(timeStamp));
-                clickTimes.add(c.getInt(timeStamp));
+                clicks.add(new Click(c.getInt(ratingColIndex),c.getInt(timeStamp)));
             } while (c.moveToNext());
         } else
             Log.d(LOG_TAG, "0 rows");
         c.close();
-        return clickTimes;
+        return clicks;
     }
 
     public void save(int rating, String text){

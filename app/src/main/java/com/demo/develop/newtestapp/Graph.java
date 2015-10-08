@@ -9,8 +9,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
+import com.demo.develop.newtestapp.classes.Click;
 import com.demo.develop.newtestapp.helper.DBHelper;
 import com.demo.develop.newtestapp.helper.Dao;
 
@@ -22,7 +22,7 @@ import org.achartengine.renderer.BasicStroke;
 import org.achartengine.renderer.XYMultipleSeriesRenderer;
 import org.achartengine.renderer.XYSeriesRenderer;
 
-import java.util.Date;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Graph extends Activity {
@@ -30,48 +30,37 @@ public class Graph extends Activity {
     private Dao dao;
 
     private View mChart;
-    private String[] rating;
+    private String[] timeClicking;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.graph);
-
         dao = new Dao(new DBHelper(this));
-// Getting reference to the button btn_chart
-        Button btnChart = (Button) findViewById(R.id.btn_chart);
-
-// Defining click event listener for the button btn_chart
-        View.OnClickListener clickListener = new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-// Draw the Income Chart
-                openChart();
-            }
-        };
-
-// Setting event click listener for the button btn_chart of the MainActivity layout
-        btnChart.setOnClickListener(clickListener);
-
+        openChart();
     }
 
     private void openChart(){
         int[] x = { 0,1,2,3,4,5,6,7, 8, 9 };
-        List<Integer> timeStamps = dao.readAll();
-        rating = new String[timeStamps.size()];
-        for(int j = 0; j<rating.length; j++)
-            rating[j] = timeStamps.get(j).toString();
+        List<Click> clicks = dao.readAll();
+        List<Integer> timeStamps = new ArrayList<>();
+        List<Integer> ratings = new ArrayList<>();
+        for (Click click: clicks){
+            timeStamps.add(click.getTimeStamp());
+            ratings.add(click.getRating());
+        }
+        timeClicking = new String[timeStamps.size()];
+        for(int j = 0; j< timeClicking.length; j++)
+            timeClicking[j] = timeStamps.get(j).toString();
 
-//        int [] x2 = new int[timeStamps.size()];
-//        for(int j = 0; j<x2.length; j++)
-//            x2[j] = timeStamps.get(j);
-        int[] income = { 1,6,3,4,5,2,7,8, 1,10,0,0};
+        int [] rating = new int[ratings.size()];
+        for(int j = 0; j<rating.length; j++)
+            rating[j] = ratings.get(j);
 
 // Creating an XYSeries for Income
         XYSeries incomeSeries = new XYSeries("Clicking");
 // Adding data to Income Serie
-        for(int i=0;i<rating.length;i++){
-            incomeSeries.add(i,income[i]);
+        for(int i=0;i< timeClicking.length;i++){
+            incomeSeries.add(i,rating[i]);
         }
 
 // Creating a dataset to hold each series
@@ -162,8 +151,8 @@ public class Graph extends Activity {
 //setting the margin size for the graph in the order top, left, bottom, right
         multiRenderer.setMargins(new int[]{30, 30, 30, 30});
 
-        for(int i=0; i< rating.length;i++){
-            multiRenderer.addXTextLabel(i, rating[i]);
+        for(int i=0; i< timeClicking.length;i++){
+            multiRenderer.addXTextLabel(i, timeClicking[i]);
         }
 
 // Adding incomeRenderer to multipleRenderer
