@@ -68,7 +68,7 @@ public class Graph extends Activity {
             XYMultipleSeriesDataset dataset = new XYMultipleSeriesDataset();
             dataset.addSeries(incomeSeries);
             XYSeriesRenderer incomeRenderer = new XYSeriesRenderer();
-            incomeRenderer.setColor(Color.CYAN);
+            incomeRenderer.setColor(Color.BLUE);
             incomeRenderer.setFillPoints(true);
             incomeRenderer.setLineWidth(2f);
             incomeRenderer.setDisplayChartValues(true);
@@ -78,7 +78,7 @@ public class Graph extends Activity {
             XYMultipleSeriesRenderer multiRenderer = new XYMultipleSeriesRenderer();
             multiRenderer.setXLabels(0);
             multiRenderer.setChartTitle("Graph");
-            multiRenderer.setXTitle("Time and date");
+            multiRenderer.setXTitle("\n\n\nTime and date");
             multiRenderer.setYTitle("Rating");
             multiRenderer.setChartTitleTextSize(28);
             multiRenderer.setAxisTitleTextSize(24);
@@ -97,11 +97,11 @@ public class Graph extends Activity {
             multiRenderer.setInScroll(false);
             multiRenderer.setLegendHeight(30);
             multiRenderer.setXLabelsAlign(Paint.Align.CENTER);
-            multiRenderer.setYLabelsAlign(Paint.Align.LEFT);
+            multiRenderer.setYLabelsAlign(Paint.Align.RIGHT);
             multiRenderer.setTextTypeface("sans_serif", Typeface.NORMAL);
             multiRenderer.setYLabels(10);
             multiRenderer.setYAxisMin(1);
-            multiRenderer.setYAxisMax(10);
+            multiRenderer.setYAxisMax(10.5);
             multiRenderer.setXAxisMin(-1);
             multiRenderer.setXAxisMax(11);
             multiRenderer.setBackgroundColor(Color.TRANSPARENT);
