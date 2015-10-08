@@ -26,6 +26,7 @@ import org.achartengine.renderer.BasicStroke;
 import org.achartengine.renderer.XYMultipleSeriesRenderer;
 import org.achartengine.renderer.XYSeriesRenderer;
 
+import java.text.Format;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -48,7 +49,7 @@ public class Graph extends Activity {
     private void openChart() {
         List<Click> clicks = dao.readAll();
         if (clicks.size() != 0) {
-            List<Integer> timeStamps = new ArrayList<>();
+            List<Long> timeStamps = new ArrayList<>();
             List<Integer> ratings = new ArrayList<>();
             int[] gradients = {1,2,3,4,5,6,7,8,9,10};
             for (Click click : clicks) {
@@ -130,10 +131,16 @@ public class Graph extends Activity {
         }
     }
 
-    private String makeDateAndTimeFormat(int timeStamp){
-        long timeMilis = new Long(timeStamp);
-        Date date = new java.util.Date(timeMilis);
-        String dateFormat = new SimpleDateFormat("dd.MM\nHH:mm").format(date);
+    private String makeDateAndTimeFormat(long timeStamp){
+//        long timeMilis = new Long(timeStamp);
+//        Date date = new java.util.Date(timeMilis);
+//        String dateFormat = new SimpleDateFormat("yyyy dd.MM\nHH:mm").format(date);
+//        return dateFormat;
+
+        Date date = new Date(timeStamp);
+        Format format = new SimpleDateFormat("dd.MM\nHH:mm");
+        String dateFormat = format.format(date);
+
         return dateFormat;
     }
 }

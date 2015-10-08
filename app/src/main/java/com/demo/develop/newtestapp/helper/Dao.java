@@ -8,10 +8,14 @@ import android.util.Log;
 
 import com.demo.develop.newtestapp.classes.Click;
 
+import java.text.Format;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
+import java.util.TimeZone;
 
 public class Dao {
     final String LOG_TAG = "myLogs";
@@ -38,7 +42,7 @@ public class Dao {
                                 ", ratingColIndex = " + c.getString(ratingColIndex) +
                                 ", textColIndex = " + c.getString(textColIndex) +
                                 ",timeStamp = " + c.getString(timeStamp));
-                clicks.add(new Click(c.getInt(ratingColIndex),c.getInt(timeStamp)));
+                clicks.add(new Click(c.getInt(ratingColIndex),c.getLong(timeStamp)));
             } while (c.moveToNext());
         } else
             Log.d(LOG_TAG, "0 rows");
@@ -53,7 +57,7 @@ public class Dao {
         cv.put("rating", rating);
         cv.put("text", text);
         Calendar calendar = Calendar.getInstance();
-        cv.put("timeStamp", calendar.getTimeInMillis());
+        cv.put("timeStamp", calendar.getTimeInMillis()+10800000);
         long rowID = db.insert("testTable", null, cv);
         Log.d(LOG_TAG, "row inserted, ID = " + rowID);
     }

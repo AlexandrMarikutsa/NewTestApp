@@ -3,9 +3,9 @@ package com.demo.develop.newtestapp.classes;
 public class Click {
     private int rating;
     private String text;
-    private int timeStamp;
+    private long timeStamp;
 
-    public Click(int rating, int timeStamp) {
+    public Click(int rating, long timeStamp) {
         this.rating = rating;
         this.timeStamp = timeStamp;
     }
@@ -26,11 +26,11 @@ public class Click {
         this.text = text;
     }
 
-    public int getTimeStamp() {
+    public long getTimeStamp() {
         return timeStamp;
     }
 
-    public void setTimeStamp(int timeStamp) {
+    public void setTimeStamp(long timeStamp) {
         this.timeStamp = timeStamp;
     }
 }
