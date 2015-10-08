@@ -6,9 +6,13 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.demo.develop.newtestapp.classes.Click;
 import com.demo.develop.newtestapp.helper.DBHelper;
@@ -41,76 +45,89 @@ public class Graph extends Activity {
         openChart();
     }
 
-    private void openChart(){
+    private void openChart() {
         List<Click> clicks = dao.readAll();
-        List<Integer> timeStamps = new ArrayList<>();
-        List<Integer> ratings = new ArrayList<>();
-        for (Click click: clicks){
-            timeStamps.add(click.getTimeStamp());
-            ratings.add(click.getRating());
+        if (clicks.size() != 0) {
+            List<Integer> timeStamps = new ArrayList<>();
+            List<Integer> ratings = new ArrayList<>();
+            int[] gradients = {1,2,3,4,5,6,7,8,9,10};
+            for (Click click : clicks) {
+                timeStamps.add(click.getTimeStamp());
+                ratings.add(click.getRating());
+            }
+            timeClicking = new String[timeStamps.size()];
+            for (int j = 0; j < timeClicking.length; j++)
+                timeClicking[j] = makeDateAndTimeFormat(timeStamps.get(j));
+            int[] rating = new int[ratings.size()];
+            for (int j = 0; j < rating.length; j++)
+                rating[j] = ratings.get(j);
+            XYSeries incomeSeries = new XYSeries("Clicking");
+            for (int i = 0; i < timeClicking.length; i++) {
+                incomeSeries.add(i, rating[i]);
+            }
+            XYMultipleSeriesDataset dataset = new XYMultipleSeriesDataset();
+            dataset.addSeries(incomeSeries);
+            XYSeriesRenderer incomeRenderer = new XYSeriesRenderer();
+            incomeRenderer.setColor(Color.CYAN);
+            incomeRenderer.setFillPoints(true);
+            incomeRenderer.setLineWidth(2f);
+            incomeRenderer.setDisplayChartValues(true);
+            incomeRenderer.setDisplayChartValuesDistance(10);
+            incomeRenderer.setPointStyle(PointStyle.CIRCLE);
+            incomeRenderer.setStroke(BasicStroke.SOLID);
+            XYMultipleSeriesRenderer multiRenderer = new XYMultipleSeriesRenderer();
+            multiRenderer.setXLabels(0);
+            multiRenderer.setChartTitle("Graph");
+            multiRenderer.setXTitle("Time and date");
+            multiRenderer.setYTitle("Rating");
+            multiRenderer.setChartTitleTextSize(28);
+            multiRenderer.setAxisTitleTextSize(24);
+            multiRenderer.setLabelsTextSize(11);
+            multiRenderer.setZoomButtonsVisible(false);
+            multiRenderer.setPanEnabled(false, false);
+            multiRenderer.setClickEnabled(false);
+            multiRenderer.setZoomEnabled(false, false);
+            multiRenderer.setShowGridY(true);
+            multiRenderer.setShowGridX(true);
+            multiRenderer.setFitLegend(true);
+            multiRenderer.setShowGrid(true);
+            multiRenderer.setZoomEnabled(false);
+            multiRenderer.setExternalZoomEnabled(false);
+            multiRenderer.setAntialiasing(true);
+            multiRenderer.setInScroll(false);
+            multiRenderer.setLegendHeight(30);
+            multiRenderer.setXLabelsAlign(Paint.Align.CENTER);
+            multiRenderer.setYLabelsAlign(Paint.Align.LEFT);
+            multiRenderer.setTextTypeface("sans_serif", Typeface.NORMAL);
+            multiRenderer.setYLabels(10);
+            multiRenderer.setYAxisMin(1);
+            multiRenderer.setYAxisMax(10);
+            multiRenderer.setXAxisMin(-1);
+            multiRenderer.setXAxisMax(11);
+            multiRenderer.setBackgroundColor(Color.TRANSPARENT);
+            multiRenderer.setMarginsColor(getResources().getColor(R.color.transparent_background));
+            multiRenderer.setApplyBackgroundColor(true);
+            multiRenderer.setScale(2f);
+            multiRenderer.setPointSize(4f);
+            multiRenderer.setMargins(new int[]{30, 30, 30, 30});
+            for (int i = 0; i < timeClicking.length; i++) {
+                multiRenderer.addXTextLabel(i, timeClicking[i]);
+            }
+            multiRenderer.addSeriesRenderer(incomeRenderer);
+            LinearLayout chartContainer = (LinearLayout) findViewById(R.id.chart);
+            chartContainer.removeAllViews();
+            mChart = ChartFactory.getLineChartView(Graph.this, dataset, multiRenderer);
+            chartContainer.addView(mChart);
+        }else {
+            TextView textView = new TextView(Graph.this);
+            View linearLayout =  findViewById(R.id.chart_relative);
+            textView.setText("There is no data to show graph...");
+//            textView.setId(5);
+            textView. setGravity(Gravity.CENTER);
+            textView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+
+            ((RelativeLayout) linearLayout).addView(textView);
         }
-        timeClicking = new String[timeStamps.size()];
-        for(int j = 0; j< timeClicking.length; j++)
-            timeClicking[j] = makeDateAndTimeFormat(timeStamps.get(j));
-        int [] rating = new int[ratings.size()];
-        for(int j = 0; j<rating.length; j++)
-            rating[j] = ratings.get(j);
-        XYSeries incomeSeries = new XYSeries("Clicking");
-        for(int i=0;i< timeClicking.length;i++){
-            incomeSeries.add(i,rating[i]);
-        }
-        XYMultipleSeriesDataset dataset = new XYMultipleSeriesDataset();
-        dataset.addSeries(incomeSeries);
-        XYSeriesRenderer incomeRenderer = new XYSeriesRenderer();
-        incomeRenderer.setColor(Color.CYAN);
-        incomeRenderer.setFillPoints(true);
-        incomeRenderer.setLineWidth(2f);
-        incomeRenderer.setDisplayChartValues(true);
-        incomeRenderer.setDisplayChartValuesDistance(10);
-        incomeRenderer.setPointStyle(PointStyle.CIRCLE);
-        incomeRenderer.setStroke(BasicStroke.SOLID);
-        XYMultipleSeriesRenderer multiRenderer = new XYMultipleSeriesRenderer();
-        multiRenderer.setXLabels(0);
-        multiRenderer.setChartTitle("Graph");
-        multiRenderer.setXTitle("Time and date");
-        multiRenderer.setYTitle("Rating");
-        multiRenderer.setChartTitleTextSize(28);
-        multiRenderer.setAxisTitleTextSize(24);
-        multiRenderer.setLabelsTextSize(11);
-        multiRenderer.setZoomButtonsVisible(false);
-        multiRenderer.setPanEnabled(false, false);
-        multiRenderer.setClickEnabled(false);
-        multiRenderer.setZoomEnabled(false, false);
-        multiRenderer.setShowGridY(true);
-        multiRenderer.setShowGridX(true);
-        multiRenderer.setFitLegend(true);
-        multiRenderer.setShowGrid(true);
-        multiRenderer.setZoomEnabled(false);
-        multiRenderer.setExternalZoomEnabled(false);
-        multiRenderer.setAntialiasing(true);
-        multiRenderer.setInScroll(false);
-        multiRenderer.setLegendHeight(30);
-        multiRenderer.setXLabelsAlign(Paint.Align.CENTER);
-        multiRenderer.setYLabelsAlign(Paint.Align.LEFT);
-        multiRenderer.setTextTypeface("sans_serif", Typeface.NORMAL);
-        multiRenderer.setYLabels(10);
-        multiRenderer.setYAxisMax(10);
-        multiRenderer.setXAxisMin(-1);
-        multiRenderer.setXAxisMax(11);
-        multiRenderer.setBackgroundColor(Color.TRANSPARENT);
-        multiRenderer.setMarginsColor(getResources().getColor(R.color.transparent_background));
-        multiRenderer.setApplyBackgroundColor(true);
-        multiRenderer.setScale(2f);
-        multiRenderer.setPointSize(4f);
-        multiRenderer.setMargins(new int[]{30, 30, 30, 30});
-        for(int i=0; i< timeClicking.length;i++){
-            multiRenderer.addXTextLabel(i, timeClicking[i]);
-        }
-        multiRenderer.addSeriesRenderer(incomeRenderer);
-        LinearLayout chartContainer = (LinearLayout) findViewById(R.id.chart);
-        chartContainer.removeAllViews();
-        mChart = ChartFactory.getLineChartView(Graph.this, dataset, multiRenderer);
-        chartContainer.addView(mChart);
     }
 
     private String makeDateAndTimeFormat(int timeStamp){
