@@ -16,6 +16,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.demo.develop.newtestapp.helper.DBHelper;
+import com.demo.develop.newtestapp.helper.Dao;
+
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
@@ -23,7 +26,6 @@ import java.util.List;
 
 public class MainActivity extends Activity implements View.OnClickListener {
 
-    final String LOG_TAG = "myLogs";
     private int rating = 0;
 
     private Button graph, btn1,btn2,btn3,btn4,btn5,btn6,btn7,btn8,btn9,btn10,btnSave,btnRead,btnDelete;
@@ -31,7 +33,6 @@ public class MainActivity extends Activity implements View.OnClickListener {
     private EditText enterText;
 
     private DBHelper dbHelper;
-
 
     private List<Button> buttons;
 
@@ -46,74 +47,23 @@ public class MainActivity extends Activity implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-//        Dao dao = new Dao(dbHelper);
-        ContentValues cv = new ContentValues();
-        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        Dao dao = new Dao(dbHelper);
         switch (v.getId()) {
             case R.id.save_button:
-//                String text = enterText.getText().toString();
-                Log.d(LOG_TAG, "--- Insert in testTable: ---");
-                cv.put("rating", rating);
-                cv.put("text", enterText.getText().toString());
-                Calendar calendar = Calendar.getInstance();
-                cv.put("timeStamp",calendar.getTimeInMillis());
+                String text = enterText.getText().toString();
                 enterText.getText().clear();
-//                dao.save(rating,text);
-                long rowID = db.insert("testTable", null, cv);
-                Log.d(LOG_TAG, "row inserted, ID = " + rowID);
+                dao.save(rating,text);
                 rating = 0;
                 break;
             case R.id.btnRead:
-                Log.d(LOG_TAG, "--- Rows in testTable: ---");
-                Cursor c = db.query("testTable", null, null, null, null, null, null);
-                if (c.moveToFirst()) {
-                    int idColIndex = c.getColumnIndex("id");
-                    int ratingColIndex = c.getColumnIndex("rating");
-                    int textColIndex = c.getColumnIndex("text");
-                    int timeStamp = c.getColumnIndex("timeStamp");
-
-                    do {
-                        Log.d(LOG_TAG,
-                                "ID = " + c.getInt(idColIndex) +
-                                        ", ratingColIndex = " + c.getString(ratingColIndex) +
-                                        ", textColIndex = " + c.getString(textColIndex) +
-                                        ",timeStamp = " + c.getString(timeStamp));
-                    } while (c.moveToNext());
-                } else
-                    Log.d(LOG_TAG, "0 rows");
-                c.close();
+                dao.readAll();
                 break;
             case R.id.btnDelete:
-                Log.d(LOG_TAG, "--- Clear testTable: ---");
-                int clearCount = db.delete("testTable", null, null);
-                Log.d(LOG_TAG, "deleted rows count = " + clearCount);
+                dao.deleteAll();
                 break;
         }
         dbHelper.close();
     }
-
-    class DBHelper extends SQLiteOpenHelper {
-
-        public DBHelper(Context context) {
-            super(context, "myDB", null, 1);
-        }
-
-        @Override
-        public void onCreate(SQLiteDatabase db) {
-            Log.d(LOG_TAG, "--- onCreate database ---");
-            db.execSQL("create table testTable ("
-                    + "id integer primary key autoincrement,"
-                    + "rating integer,"
-                    + "text text,"
-                    + "timeStamp long" + ");");
-        }
-
-        @Override
-        public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-
-        }
-    }
-
 
     private void initViews(){
         graph = (Button)findViewById(R.id.graph);
