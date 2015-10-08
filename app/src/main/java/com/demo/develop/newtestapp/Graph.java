@@ -2,7 +2,6 @@ package com.demo.develop.newtestapp;
 
 
 import android.app.Activity;
-import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Typeface;
@@ -10,6 +9,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.TextView;
+
+import com.demo.develop.newtestapp.helper.DBHelper;
+import com.demo.develop.newtestapp.helper.Dao;
 
 import org.achartengine.ChartFactory;
 import org.achartengine.chart.PointStyle;
@@ -19,19 +22,21 @@ import org.achartengine.renderer.BasicStroke;
 import org.achartengine.renderer.XYMultipleSeriesRenderer;
 import org.achartengine.renderer.XYSeriesRenderer;
 
+import java.util.Date;
+import java.util.List;
+
 public class Graph extends Activity {
 
-    private View mChart;
-    private String[] mMonth = new String[] {
-            "Jan", "Feb" , "Mar", "Apr", "May", "Jun",
-            "Jul", "Aug" , "Sep", "Oct", "Nov", "Dec"
-    };
+    private Dao dao;
 
+    private View mChart;
+    private String[] rating;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.graph);
 
+        dao = new Dao(new DBHelper(this));
 // Getting reference to the button btn_chart
         Button btnChart = (Button) findViewById(R.id.btn_chart);
 
@@ -51,13 +56,21 @@ public class Graph extends Activity {
     }
 
     private void openChart(){
-        int[] x = { 0,1,2,3,4,5,6,7, 8, 9, 10, 11 };
-        int[] income = { 2000,2500,2700,3000,2800,3500,3700,3800, 0,0,0,0};
+        int[] x = { 0,1,2,3,4,5,6,7, 8, 9 };
+        List<Integer> timeStamps = dao.readAll();
+        rating = new String[timeStamps.size()];
+        for(int j = 0; j<rating.length; j++)
+            rating[j] = timeStamps.get(j).toString();
+
+//        int [] x2 = new int[timeStamps.size()];
+//        for(int j = 0; j<x2.length; j++)
+//            x2[j] = timeStamps.get(j);
+        int[] income = { 1,6,3,4,5,2,7,8, 1,10,0,0};
 
 // Creating an XYSeries for Income
-        XYSeries incomeSeries = new XYSeries("Date and time");
+        XYSeries incomeSeries = new XYSeries("Clicking");
 // Adding data to Income Serie
-        for(int i=0;i<x.length;i++){
+        for(int i=0;i<rating.length;i++){
             incomeSeries.add(i,income[i]);
         }
 
@@ -82,9 +95,9 @@ public class Graph extends Activity {
 // Creating a XYMultipleSeriesRenderer to customize the whole chart
         XYMultipleSeriesRenderer multiRenderer = new XYMultipleSeriesRenderer();
         multiRenderer.setXLabels(0);
-        multiRenderer.setChartTitle("Income vs Expense Chart");
-        multiRenderer.setXTitle("Year 2014");
-        multiRenderer.setYTitle("Amount in Dollars");
+        multiRenderer.setChartTitle("Graph");
+        multiRenderer.setXTitle("Time and date");
+        multiRenderer.setYTitle("Rating");
 
 /***
  * Customizing graphs
@@ -131,9 +144,9 @@ public class Graph extends Activity {
         multiRenderer.setYLabels(10);
 // setting y axis max value, Since i'm using static values inside the graph so i'm setting y max value to 4000.
 // if you use dynamic values then get the max y value and set here
-        multiRenderer.setYAxisMax(4000);
+        multiRenderer.setYAxisMax(10);
 //setting used to move the graph on xaxiz to .5 to the right
-        multiRenderer.setXAxisMin(-0.5);
+        multiRenderer.setXAxisMin(-1);
 //setting used to move the graph on xaxiz to .5 to the right
         multiRenderer.setXAxisMax(11);
 //setting bar size or space between two bars
@@ -149,8 +162,8 @@ public class Graph extends Activity {
 //setting the margin size for the graph in the order top, left, bottom, right
         multiRenderer.setMargins(new int[]{30, 30, 30, 30});
 
-        for(int i=0; i< x.length;i++){
-            multiRenderer.addXTextLabel(i, mMonth[i]);
+        for(int i=0; i< rating.length;i++){
+            multiRenderer.addXTextLabel(i, rating[i]);
         }
 
 // Adding incomeRenderer to multipleRenderer

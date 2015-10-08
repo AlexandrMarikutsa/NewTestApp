@@ -6,7 +6,10 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
 
 public class Dao {
     final String LOG_TAG = "myLogs";
@@ -18,7 +21,8 @@ public class Dao {
         db = dbHelper.getWritableDatabase();
     }
 
-    public void readAll(){
+    public List<Integer> readAll(){
+        List<Integer> clickTimes = new ArrayList<>();
         Log.d(LOG_TAG, "--- Rows in testTable: ---");
         Cursor c = db.query("testTable", null, null, null, null, null, null);
         if (c.moveToFirst()) {
@@ -26,18 +30,18 @@ public class Dao {
             int ratingColIndex = c.getColumnIndex("rating");
             int textColIndex = c.getColumnIndex("text");
             int timeStamp = c.getColumnIndex("timeStamp");
-
             do {
                 Log.d(LOG_TAG,
                         "ID = " + c.getInt(idColIndex) +
                                 ", ratingColIndex = " + c.getString(ratingColIndex) +
                                 ", textColIndex = " + c.getString(textColIndex) +
                                 ",timeStamp = " + c.getString(timeStamp));
+                clickTimes.add(c.getInt(timeStamp));
             } while (c.moveToNext());
         } else
             Log.d(LOG_TAG, "0 rows");
         c.close();
-
+        return clickTimes;
     }
 
     public void save(int rating, String text){
