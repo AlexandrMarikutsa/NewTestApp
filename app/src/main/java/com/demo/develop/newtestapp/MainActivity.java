@@ -100,7 +100,6 @@ public class MainActivity extends Activity implements View.OnClickListener {
         graph.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Intent intent = new Intent(getApplication(), LineChartActivity.class);
                 Intent intent = new Intent(getApplication(), Graph.class);
                 startActivity(intent);
             }
