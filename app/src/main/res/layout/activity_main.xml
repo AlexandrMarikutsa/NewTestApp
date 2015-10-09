@@ -52,91 +52,101 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/first_row_buttons">
-            <Button
+            <ToggleButton
                 android:id="@+id/btn1"
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"
                 android:layout_weight="1"
-                android:text="@string/button_1_text"
+                android:textOn="@string/button_1_text"
+                android:textOff="@string/button_1_text"
                 android:textSize="@dimen/central_buttons_text_size">
-            </Button>
-            <Button
+            </ToggleButton>
+            <ToggleButton
                 android:id="@+id/btn2"
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"
                 android:layout_weight="1"
-                android:text="@string/button_2_text"
+                android:textOn="@string/button_2_text"
+                android:textOff="@string/button_2_text"
                 android:textSize="@dimen/central_buttons_text_size">
-            </Button>
-            <Button
+            </ToggleButton>
+            <ToggleButton
                 android:id="@+id/btn3"
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"
                 android:layout_weight="1"
-                android:text="@string/button_3_text"
+                android:textOn="@string/button_3_text"
+                android:textOff="@string/button_3_text"
                 android:textSize="@dimen/central_buttons_text_size">
-            </Button>
-            <Button
+            </ToggleButton>
+            <ToggleButton
                 android:id="@+id/btn4"
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"
                 android:layout_weight="1"
-                android:text="@string/button_4_text"
+                android:textOn="@string/button_4_text"
+                android:textOff="@string/button_4_text"
                 android:textSize="@dimen/central_buttons_text_size">
-            </Button>
-            <Button
+            </ToggleButton>
+            <ToggleButton
                 android:id="@+id/btn5"
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"
                 android:layout_weight="1"
-                android:text="@string/button_5_text"
+                android:textOn="@string/button_5_text"
+                android:textOff="@string/button_5_text"
                 android:textSize="@dimen/central_buttons_text_size">
-            </Button>
+            </ToggleButton>
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/second_row_buttons">
-            <Button
+            <ToggleButton
                 android:id="@+id/btn6"
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"
                 android:layout_weight="1"
-                android:text="@string/button_6_text"
+                android:textOn="@string/button_6_text"
+                android:textOff="@string/button_6_text"
                 android:textSize="@dimen/central_buttons_text_size">
-            </Button>
-            <Button
+            </ToggleButton>
+            <ToggleButton
                 android:id="@+id/btn7"
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"
                 android:layout_weight="1"
-                android:text="@string/button_7_text"
+                android:textOn="@string/button_7_text"
+                android:textOff="@string/button_7_text"
                 android:textSize="@dimen/central_buttons_text_size">
-            </Button>
-            <Button
+            </ToggleButton>
+            <ToggleButton
                 android:id="@+id/btn8"
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"
                 android:layout_weight="1"
-                android:text="@string/button_8_text"
+                android:textOn="@string/button_8_text"
+                android:textOff="@string/button_8_text"
                 android:textSize="@dimen/central_buttons_text_size">
-            </Button>
-            <Button
+            </ToggleButton>
+            <ToggleButton
                 android:id="@+id/btn9"
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"
                 android:layout_weight="1"
-                android:text="@string/button_9_text"
+                android:textOn="@string/button_9_text"
+                android:textOff="@string/button_9_text"
                 android:textSize="@dimen/central_buttons_text_size">
-            </Button>
-            <Button
+            </ToggleButton>
+            <ToggleButton
                 android:id="@+id/btn10"
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"
                 android:layout_weight="1"
-                android:text="@string/button_10_text"
+                android:textOn="@string/button_10_text"
+                android:textOff="@string/button_10_text"
                 android:textSize="@dimen/central_buttons_text_size">
-            </Button>
+            </ToggleButton>
         </LinearLayout>
 
     </LinearLayout>

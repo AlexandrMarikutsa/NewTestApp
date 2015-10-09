@@ -31,6 +31,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class Graph extends Activity {
 
@@ -51,7 +52,6 @@ public class Graph extends Activity {
         if (clicks.size() != 0) {
             List<Long> timeStamps = new ArrayList<>();
             List<Integer> ratings = new ArrayList<>();
-            int[] gradients = {1,2,3,4,5,6,7,8,9,10};
             for (Click click : clicks) {
                 timeStamps.add(click.getTimeStamp());
                 ratings.add(click.getRating());
@@ -83,7 +83,7 @@ public class Graph extends Activity {
             multiRenderer.setYTitle("Rating");
             multiRenderer.setChartTitleTextSize(28);
             multiRenderer.setAxisTitleTextSize(24);
-            multiRenderer.setLabelsTextSize(11);
+            multiRenderer.setLabelsTextSize(11);//size of axis labels
             multiRenderer.setZoomButtonsVisible(false);
             multiRenderer.setPanEnabled(false, false);
             multiRenderer.setClickEnabled(false);
@@ -98,13 +98,15 @@ public class Graph extends Activity {
             multiRenderer.setInScroll(false);
             multiRenderer.setLegendHeight(30);
             multiRenderer.setXLabelsAlign(Paint.Align.CENTER);
+            multiRenderer.setXLabelsColor(Color.WHITE);
+            multiRenderer.setYLabelsColor(0, Color.WHITE);
             multiRenderer.setYLabelsAlign(Paint.Align.RIGHT);
-            multiRenderer.setTextTypeface("sans_serif", Typeface.NORMAL);
-            multiRenderer.setYLabels(10);
-            multiRenderer.setYAxisMin(1);
+            multiRenderer.setTextTypeface("sans_serif", Typeface.BOLD);
+            multiRenderer.setYLabels(11);
+            multiRenderer.setYAxisMin(0);
             multiRenderer.setYAxisMax(10.5);
             multiRenderer.setXAxisMin(-1);
-            multiRenderer.setXAxisMax(11);
+            multiRenderer.setXAxisMax(timeClicking.length);
             multiRenderer.setBackgroundColor(Color.TRANSPARENT);
             multiRenderer.setMarginsColor(getResources().getColor(R.color.transparent_background));
             multiRenderer.setApplyBackgroundColor(true);

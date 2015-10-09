@@ -57,7 +57,7 @@ public class Dao {
         cv.put("rating", rating);
         cv.put("text", text);
         Calendar calendar = Calendar.getInstance();
-        cv.put("timeStamp", calendar.getTimeInMillis()+10800000);
+        cv.put("timeStamp", calendar.getTimeInMillis());
         long rowID = db.insert("testTable", null, cv);
         Log.d(LOG_TAG, "row inserted, ID = " + rowID);
     }
