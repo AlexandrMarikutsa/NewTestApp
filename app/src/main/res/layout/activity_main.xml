@@ -182,7 +182,7 @@
             android:layout_height="wrap_content"
             android:layout_width="match_parent"
             android:layout_weight="1"
-            android:text="Read"
+            android:text="@string/button_read"
             android:textSize="@dimen/central_buttons_text_size">
         </Button>
         <Button
@@ -190,7 +190,7 @@
             android:layout_height="wrap_content"
             android:layout_width="match_parent"
             android:layout_weight="1"
-            android:text="Delete"
+            android:text="@string/button_delete"
             android:textSize="@dimen/central_buttons_text_size">
         </Button>
     </LinearLayout>

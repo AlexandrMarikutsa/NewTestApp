@@ -15,6 +15,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.demo.develop.newtestapp.classes.Click;
+import com.demo.develop.newtestapp.constants.GraphConstant;
 import com.demo.develop.newtestapp.helper.DBHelper;
 import com.demo.develop.newtestapp.helper.Dao;
 
@@ -32,6 +33,27 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+
+import static com.demo.develop.newtestapp.constants.GraphConstant.AXIS_TITLE_TEXT_SIZE;
+import static com.demo.develop.newtestapp.constants.GraphConstant.CHART_TITLE;
+import static com.demo.develop.newtestapp.constants.GraphConstant.CHART_TITLE_TEXT_SIZE;
+import static com.demo.develop.newtestapp.constants.GraphConstant.CHART_VALUES_DISTANCE;
+import static com.demo.develop.newtestapp.constants.GraphConstant.DATE_FORMAT;
+import static com.demo.develop.newtestapp.constants.GraphConstant.LEGEND_HEIGHT;
+import static com.demo.develop.newtestapp.constants.GraphConstant.LINE_COLOR;
+import static com.demo.develop.newtestapp.constants.GraphConstant.LINE_NAME;
+import static com.demo.develop.newtestapp.constants.GraphConstant.LINE_WIDTH;
+import static com.demo.develop.newtestapp.constants.GraphConstant.NOTHING_TO_SHOW;
+import static com.demo.develop.newtestapp.constants.GraphConstant.NUMBER_OF_X_LABELS;
+import static com.demo.develop.newtestapp.constants.GraphConstant.POINT_SIZE;
+import static com.demo.develop.newtestapp.constants.GraphConstant.SCALE;
+import static com.demo.develop.newtestapp.constants.GraphConstant.TEXT_TYPEFACE;
+import static com.demo.develop.newtestapp.constants.GraphConstant.X_AXIS_TITLE;
+import static com.demo.develop.newtestapp.constants.GraphConstant.Y_AXIS_MAX;
+import static com.demo.develop.newtestapp.constants.GraphConstant.Y_AXIS_MIN;
+import static com.demo.develop.newtestapp.constants.GraphConstant.Y_AXIS_MINI;
+import static com.demo.develop.newtestapp.constants.GraphConstant.Y_AXIS_TITLE;
+import static com.demo.develop.newtestapp.constants.GraphConstant.Y_LABELS;
 
 public class Graph extends Activity {
 
@@ -62,28 +84,28 @@ public class Graph extends Activity {
             int[] rating = new int[ratings.size()];
             for (int j = 0; j < rating.length; j++)
                 rating[j] = ratings.get(j);
-            XYSeries incomeSeries = new XYSeries("Clicking");
+            XYSeries incomeSeries = new XYSeries(LINE_NAME);
             for (int i = 0; i < timeClicking.length; i++) {
                 incomeSeries.add(i, rating[i]);
             }
             XYMultipleSeriesDataset dataset = new XYMultipleSeriesDataset();
             dataset.addSeries(incomeSeries);
             XYSeriesRenderer incomeRenderer = new XYSeriesRenderer();
-            incomeRenderer.setColor(Color.BLUE);
+            incomeRenderer.setColor(LINE_COLOR);
             incomeRenderer.setFillPoints(true);
-            incomeRenderer.setLineWidth(2f);
+            incomeRenderer.setLineWidth(LINE_WIDTH);
             incomeRenderer.setDisplayChartValues(true);
-            incomeRenderer.setDisplayChartValuesDistance(10);
+            incomeRenderer.setDisplayChartValuesDistance(CHART_VALUES_DISTANCE);
             incomeRenderer.setPointStyle(PointStyle.CIRCLE);
             incomeRenderer.setStroke(BasicStroke.SOLID);
             XYMultipleSeriesRenderer multiRenderer = new XYMultipleSeriesRenderer();
-            multiRenderer.setXLabels(0);
-            multiRenderer.setChartTitle("Graph");
-            multiRenderer.setXTitle("\n\n\nTime and date");
-            multiRenderer.setYTitle("Rating");
-            multiRenderer.setChartTitleTextSize(28);
-            multiRenderer.setAxisTitleTextSize(24);
-            multiRenderer.setLabelsTextSize(11);//size of axis labels
+            multiRenderer.setXLabels(NUMBER_OF_X_LABELS);
+            multiRenderer.setChartTitle(CHART_TITLE);
+            multiRenderer.setXTitle(X_AXIS_TITLE);
+            multiRenderer.setYTitle(Y_AXIS_TITLE);
+            multiRenderer.setChartTitleTextSize(CHART_TITLE_TEXT_SIZE);
+            multiRenderer.setAxisTitleTextSize(AXIS_TITLE_TEXT_SIZE);
+            multiRenderer.setLabelsTextSize((int) getResources().getDimension(R.dimen.axis_labels_text_size));
             multiRenderer.setZoomButtonsVisible(false);
             multiRenderer.setPanEnabled(false, false);
             multiRenderer.setClickEnabled(false);
@@ -96,23 +118,24 @@ public class Graph extends Activity {
             multiRenderer.setExternalZoomEnabled(false);
             multiRenderer.setAntialiasing(true);
             multiRenderer.setInScroll(false);
-            multiRenderer.setLegendHeight(30);
+            multiRenderer.setLegendHeight(LEGEND_HEIGHT);
             multiRenderer.setXLabelsAlign(Paint.Align.CENTER);
             multiRenderer.setXLabelsColor(Color.WHITE);
             multiRenderer.setYLabelsColor(0, Color.WHITE);
             multiRenderer.setYLabelsAlign(Paint.Align.RIGHT);
-            multiRenderer.setTextTypeface("sans_serif", Typeface.BOLD);
-            multiRenderer.setYLabels(11);
-            multiRenderer.setYAxisMin(0);
-            multiRenderer.setYAxisMax(10.5);
-            multiRenderer.setXAxisMin(-1);
+            multiRenderer.setTextTypeface(TEXT_TYPEFACE, Typeface.BOLD);
+            multiRenderer.setYLabels(Y_LABELS);
+            multiRenderer.setYAxisMin(Y_AXIS_MIN);
+            multiRenderer.setYAxisMax(Y_AXIS_MAX);
+            multiRenderer.setXAxisMin(Y_AXIS_MINI);
             multiRenderer.setXAxisMax(timeClicking.length);
             multiRenderer.setBackgroundColor(Color.TRANSPARENT);
             multiRenderer.setMarginsColor(getResources().getColor(R.color.transparent_background));
             multiRenderer.setApplyBackgroundColor(true);
-            multiRenderer.setScale(2f);
-            multiRenderer.setPointSize(4f);
-            multiRenderer.setMargins(new int[]{30, 30, 30, 30});
+            multiRenderer.setScale(SCALE);
+            multiRenderer.setPointSize(POINT_SIZE);
+            int margin = (int) getResources().getDimension(R.dimen.graph_margin);
+            multiRenderer.setMargins(new int[]{margin, margin, margin, margin});
             for (int i = 0; i < timeClicking.length; i++) {
                 multiRenderer.addXTextLabel(i, timeClicking[i]);
             }
@@ -124,7 +147,7 @@ public class Graph extends Activity {
         }else {
             TextView textView = new TextView(Graph.this);
             View linearLayout =  findViewById(R.id.chart_relative);
-            textView.setText("There is no data to show graph...");
+            textView.setText(NOTHING_TO_SHOW);
             textView. setGravity(Gravity.CENTER);
             textView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
 
@@ -134,7 +157,7 @@ public class Graph extends Activity {
 
     private String makeDateAndTimeFormat(long timeStamp){
         Date date = new Date(timeStamp);
-        Format format = new SimpleDateFormat("dd.MM\nHH:mm");
+        Format format = new SimpleDateFormat(DATE_FORMAT);
         String dateFormat = format.format(date);
 
         return dateFormat;

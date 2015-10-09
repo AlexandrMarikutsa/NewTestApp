@@ -12,4 +12,6 @@
     <dimen name="central_buttons_text_size">18sp</dimen>
     <dimen name="edit_text_layout_margin_top">30dp</dimen>
     <dimen name="button_save_layout_margin_top">20dp</dimen>
+    <dimen name="graph_margin">25dp</dimen>
+    <dimen name="axis_labels_text_size">11dp</dimen>
 </resources>

@@ -8,6 +8,7 @@ import android.util.Log;
 
 import com.demo.develop.newtestapp.BuildConfig;
 import com.demo.develop.newtestapp.classes.Click;
+import com.demo.develop.newtestapp.constants.DataBase;
 
 import java.text.Format;
 import java.text.SimpleDateFormat;
@@ -17,6 +18,12 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.TimeZone;
+
+import static com.demo.develop.newtestapp.constants.DataBase.ID;
+import static com.demo.develop.newtestapp.constants.DataBase.RATING;
+import static com.demo.develop.newtestapp.constants.DataBase.TABLE_NAME;
+import static com.demo.develop.newtestapp.constants.DataBase.TEXT;
+import static com.demo.develop.newtestapp.constants.DataBase.TIME_STAMP;
 
 public class Dao {
     final String LOG_TAG = "myLogs";
@@ -33,12 +40,12 @@ public class Dao {
         if (BuildConfig.DEBUG) {
             Log.d(LOG_TAG, "--- Rows in testTable: ---");
         }
-        Cursor c = db.query("testTable", null, null, null, null, null, null);
+        Cursor c = db.query(TABLE_NAME, null, null, null, null, null, null);
         if (c.moveToFirst()) {
-            int idColIndex = c.getColumnIndex("id");
-            int ratingColIndex = c.getColumnIndex("rating");
-            int textColIndex = c.getColumnIndex("text");
-            int timeStamp = c.getColumnIndex("timeStamp");
+            int idColIndex = c.getColumnIndex(ID);
+            int ratingColIndex = c.getColumnIndex(RATING);
+            int textColIndex = c.getColumnIndex(TEXT);
+            int timeStamp = c.getColumnIndex(TIME_STAMP);
             do {
                 if (BuildConfig.DEBUG) {
                     Log.d(LOG_TAG,
@@ -63,11 +70,11 @@ public class Dao {
         if (BuildConfig.DEBUG) {
             Log.d(LOG_TAG, "--- Insert in testTable: ---");
         }
-        cv.put("rating", rating);
-        cv.put("text", text);
+        cv.put(RATING, rating);
+        cv.put(TEXT, text);
         Calendar calendar = Calendar.getInstance();
-        cv.put("timeStamp", calendar.getTimeInMillis());
-        long rowID = db.insert("testTable", null, cv);
+        cv.put(TIME_STAMP, calendar.getTimeInMillis());
+        long rowID = db.insert(TABLE_NAME, null, cv);
         if (BuildConfig.DEBUG) {
             Log.d(LOG_TAG, "row inserted, ID = " + rowID);
         }
