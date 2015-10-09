@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
+import com.demo.develop.newtestapp.BuildConfig;
 import com.demo.develop.newtestapp.classes.Click;
 
 import java.text.Format;
@@ -29,7 +30,9 @@ public class Dao {
 
     public List<Click> readAll(){
         List<Click> clicks = new ArrayList<>();
-        Log.d(LOG_TAG, "--- Rows in testTable: ---");
+        if (BuildConfig.DEBUG) {
+            Log.d(LOG_TAG, "--- Rows in testTable: ---");
+        }
         Cursor c = db.query("testTable", null, null, null, null, null, null);
         if (c.moveToFirst()) {
             int idColIndex = c.getColumnIndex("id");
@@ -37,15 +40,19 @@ public class Dao {
             int textColIndex = c.getColumnIndex("text");
             int timeStamp = c.getColumnIndex("timeStamp");
             do {
-                Log.d(LOG_TAG,
-                        "ID = " + c.getInt(idColIndex) +
-                                ", ratingColIndex = " + c.getString(ratingColIndex) +
-                                ", textColIndex = " + c.getString(textColIndex) +
-                                ",timeStamp = " + c.getString(timeStamp));
+                if (BuildConfig.DEBUG) {
+                    Log.d(LOG_TAG,
+                            "ID = " + c.getInt(idColIndex) +
+                                    ", ratingColIndex = " + c.getString(ratingColIndex) +
+                                    ", textColIndex = " + c.getString(textColIndex) +
+                                    ",timeStamp = " + c.getString(timeStamp));
+                }
                 clicks.add(new Click(c.getInt(ratingColIndex),c.getLong(timeStamp)));
             } while (c.moveToNext());
         } else
+        if (BuildConfig.DEBUG) {
             Log.d(LOG_TAG, "0 rows");
+        }
         c.close();
         return clicks;
     }
@@ -53,18 +60,26 @@ public class Dao {
     public void save(int rating, String text){
         ContentValues cv = new ContentValues();
         db = dbHelper.getWritableDatabase();
-        Log.d(LOG_TAG, "--- Insert in testTable: ---");
+        if (BuildConfig.DEBUG) {
+            Log.d(LOG_TAG, "--- Insert in testTable: ---");
+        }
         cv.put("rating", rating);
         cv.put("text", text);
         Calendar calendar = Calendar.getInstance();
         cv.put("timeStamp", calendar.getTimeInMillis());
         long rowID = db.insert("testTable", null, cv);
-        Log.d(LOG_TAG, "row inserted, ID = " + rowID);
+        if (BuildConfig.DEBUG) {
+            Log.d(LOG_TAG, "row inserted, ID = " + rowID);
+        }
     }
 
     public void deleteAll(){
-        Log.d(LOG_TAG, "--- Clear testTable: ---");
+        if (BuildConfig.DEBUG) {
+            Log.d(LOG_TAG, "--- Clear testTable: ---");
+        }
         int clearCount = db.delete("testTable", null, null);
-        Log.d(LOG_TAG, "deleted rows count = " + clearCount);
+        if (BuildConfig.DEBUG) {
+            Log.d(LOG_TAG, "deleted rows count = " + clearCount);
+        }
     }
 }

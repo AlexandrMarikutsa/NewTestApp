@@ -43,7 +43,6 @@ public class MainActivity extends Activity implements View.OnClickListener {
                 String text = enterText.getText().toString();
                 enterText.getText().clear();
                 dao.save(rating,text);
-                rating = 0;
                 break;
             case R.id.btnRead:
                 dao.readAll();
@@ -51,6 +50,9 @@ public class MainActivity extends Activity implements View.OnClickListener {
             case R.id.btnDelete:
                 dao.deleteAll();
                 break;
+        }
+        if(currentButton != null) {
+            currentButton.setChecked(false);
         }
         dbHelper.close();
     }
@@ -64,10 +66,15 @@ public class MainActivity extends Activity implements View.OnClickListener {
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 
                     if (currentButton != null) {
-                        //currentButton.;
+                        currentButton.setChecked(false);
+                        rating =0;
                     }
-
                     currentButton = (ToggleButton) buttonView;
+                    if(isChecked) {
+                        rating = Integer.parseInt(currentButton.getText().toString());
+                    }else {
+                        rating = 0;
+                    }
                 }
             });
         }

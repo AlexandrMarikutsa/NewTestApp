@@ -6,6 +6,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import com.demo.develop.newtestapp.BuildConfig;
+
 public class DBHelper extends SQLiteOpenHelper {
 
     final String LOG_TAG = "myLogs";
@@ -16,7 +18,9 @@ public class DBHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        Log.d(LOG_TAG, "--- onCreate database ---");
+        if (BuildConfig.DEBUG) {
+            Log.d(LOG_TAG, "--- onCreate database ---");
+        }
         db.execSQL("create table testTable ("
                 + "id integer primary key autoincrement,"
                 + "rating integer,"

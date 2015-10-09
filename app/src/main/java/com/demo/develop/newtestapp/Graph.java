@@ -125,7 +125,6 @@ public class Graph extends Activity {
             TextView textView = new TextView(Graph.this);
             View linearLayout =  findViewById(R.id.chart_relative);
             textView.setText("There is no data to show graph...");
-//            textView.setId(5);
             textView. setGravity(Gravity.CENTER);
             textView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
 
@@ -134,11 +133,6 @@ public class Graph extends Activity {
     }
 
     private String makeDateAndTimeFormat(long timeStamp){
-//        long timeMilis = new Long(timeStamp);
-//        Date date = new java.util.Date(timeMilis);
-//        String dateFormat = new SimpleDateFormat("yyyy dd.MM\nHH:mm").format(date);
-//        return dateFormat;
-
         Date date = new Date(timeStamp);
         Format format = new SimpleDateFormat("dd.MM\nHH:mm");
         String dateFormat = format.format(date);
