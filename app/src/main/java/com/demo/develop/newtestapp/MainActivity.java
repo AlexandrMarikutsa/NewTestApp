@@ -2,6 +2,7 @@ package com.demo.develop.newtestapp;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -60,7 +61,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
     private void initViews(){
         graph = (Button)findViewById(R.id.graph);
         for (int id : buttonIds) {
-            ToggleButton button = (ToggleButton) findViewById(id);
+            final ToggleButton button = (ToggleButton) findViewById(id);
             button.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
