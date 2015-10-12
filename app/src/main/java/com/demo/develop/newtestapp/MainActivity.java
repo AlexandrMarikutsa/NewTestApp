@@ -2,9 +2,7 @@ package com.demo.develop.newtestapp;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
-import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
@@ -13,7 +11,6 @@ import android.widget.EditText;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
-import com.demo.develop.newtestapp.constants.Message;
 import com.demo.develop.newtestapp.helper.DBHelper;
 import com.demo.develop.newtestapp.helper.Dao;
 
@@ -78,12 +75,14 @@ public class MainActivity extends Activity implements View.OnClickListener {
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 
                     if (currentButton != null) {
-                        rating =0;
+                        currentButton.setChecked(false);
+                        rating = 0;
                     }
                     currentButton = (ToggleButton) buttonView;
-                    if(isChecked) {
+                    if (isChecked) {
                         rating = Integer.parseInt(currentButton.getText().toString());
-                    }else {
+                    } else {
+                        currentButton = null;
                         rating = 0;
                     }
                 }
@@ -91,6 +90,11 @@ public class MainActivity extends Activity implements View.OnClickListener {
         }
         btnSave = (Button) findViewById(R.id.save_button);
         btnRead = (Button) findViewById(R.id.btnRead);
+        if (BuildConfig.DEBUG) {
+            btnRead.setVisibility(View.VISIBLE);
+        }else {
+            btnRead.setVisibility(View.GONE);
+        }
         btnDelete = (Button) findViewById(R.id.btnDelete);
         enterText = (EditText) findViewById(R.id.edit_text);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -100,7 +104,9 @@ public class MainActivity extends Activity implements View.OnClickListener {
     private void setOnClickListener(){
         btnSave.setOnClickListener(this);
         enterText.setOnClickListener(this);
-        btnRead.setOnClickListener(this);
+        if (BuildConfig.DEBUG) {
+            btnRead.setOnClickListener(this);
+        }
         btnDelete.setOnClickListener(this);
         graph.setOnClickListener(new View.OnClickListener() {
             @Override

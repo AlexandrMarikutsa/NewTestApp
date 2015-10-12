@@ -20,7 +20,7 @@ import static com.demo.develop.newtestapp.constants.DataBase.TEXT;
 import static com.demo.develop.newtestapp.constants.DataBase.TIME_STAMP;
 
 public class Dao {
-    final String LOG_TAG = "myLogs";
+    final String LOG_TAG = Dao.class.getSimpleName();
     private SQLiteDatabase db;
     private DBHelper dbHelper;
 

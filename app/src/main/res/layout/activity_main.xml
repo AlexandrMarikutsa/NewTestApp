@@ -17,7 +17,6 @@
             android:layout_below="@+id/save_button"
             android:baselineAligned="false">
             <Button
-                android:debuggable="true"
                 android:id="@+id/btnRead"
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"

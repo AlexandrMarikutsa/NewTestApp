@@ -1,3 +1,5 @@
+import java.text.SimpleDateFormat
+
 apply plugin: 'com.android.application'
 
 android {
@@ -11,13 +13,53 @@ android {
         versionCode 1
         versionName "1.0"
     }
-    buildTypes {
+    signingConfigs {
         release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            storeFile file("keystore_pass_keystore.jks")
+            storePassword "keystore"
+            keyAlias "keystore"
+            keyPassword "keystore"
+        }
+
+        debug {
+            storeFile file("keystore_pass_keystore.jks")
+            storePassword "keystore"
+            keyAlias "keystore"
+            keyPassword "keystore"
         }
     }
-}
+    buildTypes {
+        debug {
+            debuggable true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            minifyEnabled false
+        }
+        release {
+            signingConfig signingConfigs.release
+            debuggable false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            minifyEnabled false
+        }
+        applicationVariants.all {
+            variant ->
+                variant.outputs.each { output ->
+                    def file = output.outputFile
+
+//                    FileUtils.deleteOldApk(file.parent)
+
+//                    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd-hh:mm");
+//                    output.outputFile = new File(file.parent, "lookALike_" + simpleDateFormat.format(new Date()) + ".apk")
+                    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd-hh:mm");
+                    def name = file.name.replace(".apk", "_v"+defaultConfig.versionName + "_" + simpleDateFormat.format(new Date()) + ".apk")
+                    output.outputFile = new File(file.parent, name.replace("app", "keystore"))
+
+                }
+        }
+    }
+
+    lintOptions {
+        abortOnError false
+    }}
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
