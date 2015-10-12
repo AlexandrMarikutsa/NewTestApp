@@ -4,5 +4,5 @@
     <color name="toolbar_button_background">#7AB2C4</color>
     <color name="transparent_background">#314247</color>
     <color name="buttons_background_off">#CFCFCF</color>
-    <color name="buttons_background_on">#B5B5B5</color>
+    <color name="buttons_background_on">#7AB2C4</color>
 </resources>

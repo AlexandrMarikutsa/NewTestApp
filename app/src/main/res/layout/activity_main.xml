@@ -206,7 +206,7 @@
     </EditText>
 
     <Button
-        android:layout_width="wrap_content"
+        android:layout_width="@dimen/save_button_width"
         android:layout_height="wrap_content"
         android:text="@string/save_button_text"
         android:id="@+id/save_button"
