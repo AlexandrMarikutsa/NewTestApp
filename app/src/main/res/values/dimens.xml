@@ -6,7 +6,7 @@
     <dimen name="toolbar_button_width">60dp</dimen>
     <dimen name="central_button_layout_margin">2dp</dimen>
     <dimen name="toolbar_button_text_size">10sp</dimen>
-    <dimen name="central_text_size">50sp</dimen>
+    <dimen name="central_text_size">30sp</dimen>
     <dimen name="central_text_view_layout_margin_top">30dp</dimen>
     <dimen name="toolbar_button_margin">3dp</dimen>
     <dimen name="layout_with_all_buttons_margin_top">15dp</dimen>
