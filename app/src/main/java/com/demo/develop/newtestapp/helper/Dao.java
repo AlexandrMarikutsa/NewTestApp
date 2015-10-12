@@ -8,16 +8,10 @@ import android.util.Log;
 
 import com.demo.develop.newtestapp.BuildConfig;
 import com.demo.develop.newtestapp.classes.Click;
-import com.demo.develop.newtestapp.constants.DataBase;
 
-import java.text.Format;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
-import java.util.Locale;
-import java.util.TimeZone;
 
 import static com.demo.develop.newtestapp.constants.DataBase.ID;
 import static com.demo.develop.newtestapp.constants.DataBase.RATING;

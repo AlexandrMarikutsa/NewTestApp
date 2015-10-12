@@ -12,8 +12,6 @@ public class GraphConstant {
     public final static String CHART_TITLE = "Graph";
     public final static String X_AXIS_TITLE = "\n\n\nTime and date";
     public final static String Y_AXIS_TITLE = "Rating";
-    public final static int CHART_TITLE_TEXT_SIZE = 28;
-    public final static int AXIS_TITLE_TEXT_SIZE = 28;
     public final static int LEGEND_HEIGHT = 30;
     public final static String TEXT_TYPEFACE = "sans_serif";
     public final static int Y_LABELS = 11;

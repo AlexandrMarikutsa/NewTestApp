@@ -9,13 +9,11 @@ import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.demo.develop.newtestapp.classes.Click;
-import com.demo.develop.newtestapp.constants.GraphConstant;
 import com.demo.develop.newtestapp.helper.DBHelper;
 import com.demo.develop.newtestapp.helper.Dao;
 
@@ -32,11 +30,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 
-import static com.demo.develop.newtestapp.constants.GraphConstant.AXIS_TITLE_TEXT_SIZE;
 import static com.demo.develop.newtestapp.constants.GraphConstant.CHART_TITLE;
-import static com.demo.develop.newtestapp.constants.GraphConstant.CHART_TITLE_TEXT_SIZE;
 import static com.demo.develop.newtestapp.constants.GraphConstant.CHART_VALUES_DISTANCE;
 import static com.demo.develop.newtestapp.constants.GraphConstant.DATE_FORMAT;
 import static com.demo.develop.newtestapp.constants.GraphConstant.LEGEND_HEIGHT;
@@ -103,8 +98,8 @@ public class Graph extends Activity {
             multiRenderer.setChartTitle(CHART_TITLE);
             multiRenderer.setXTitle(X_AXIS_TITLE);
             multiRenderer.setYTitle(Y_AXIS_TITLE);
-            multiRenderer.setChartTitleTextSize(CHART_TITLE_TEXT_SIZE);
-            multiRenderer.setAxisTitleTextSize(AXIS_TITLE_TEXT_SIZE);
+            multiRenderer.setChartTitleTextSize((int) getResources().getDimension(R.dimen.chart_title_text_size));
+            multiRenderer.setAxisTitleTextSize((int) getResources().getDimension(R.dimen.axis_title_text_size));
             multiRenderer.setLabelsTextSize((int) getResources().getDimension(R.dimen.axis_labels_text_size));
             multiRenderer.setZoomButtonsVisible(false);
             multiRenderer.setPanEnabled(false, false);
@@ -134,8 +129,10 @@ public class Graph extends Activity {
             multiRenderer.setApplyBackgroundColor(true);
             multiRenderer.setScale(SCALE);
             multiRenderer.setPointSize(POINT_SIZE);
-            int margin = (int) getResources().getDimension(R.dimen.graph_margin);
-            multiRenderer.setMargins(new int[]{margin, margin, margin, margin});
+            multiRenderer.setMargins(new int[]{(int) getResources().getDimension(R.dimen.graph_margin_top),
+                    (int) getResources().getDimension(R.dimen.graph_margin_right),
+                    (int) getResources().getDimension(R.dimen.graph_margin_bottom),
+                    (int) getResources().getDimension(R.dimen.graph_margin_left)});
             for (int i = 0; i < timeClicking.length; i++) {
                 multiRenderer.addXTextLabel(i, timeClicking[i]);
             }

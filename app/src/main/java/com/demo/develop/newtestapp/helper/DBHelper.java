@@ -7,7 +7,6 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
 import com.demo.develop.newtestapp.BuildConfig;
-import com.demo.develop.newtestapp.constants.DataBase;
 
 import static com.demo.develop.newtestapp.constants.DataBase.DATABASE_NAME;
 import static com.demo.develop.newtestapp.constants.DataBase.ID;
