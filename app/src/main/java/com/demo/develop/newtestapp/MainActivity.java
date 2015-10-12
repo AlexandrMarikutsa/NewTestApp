@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
@@ -11,8 +13,11 @@ import android.widget.EditText;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
+import com.demo.develop.newtestapp.constants.Message;
 import com.demo.develop.newtestapp.helper.DBHelper;
 import com.demo.develop.newtestapp.helper.Dao;
+
+import static com.demo.develop.newtestapp.constants.Message.MESSAGE;
 
 public class MainActivity extends Activity implements View.OnClickListener {
 
@@ -47,7 +52,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
                     enterText.getText().clear();
                     dao.save(rating, text);
                 }else {
-                    Toast.makeText(getApplicationContext(), "You didn't choose rating",
+                    Toast.makeText(getApplicationContext(), MESSAGE,
                             Toast.LENGTH_LONG).show();
                 }
                 break;
@@ -88,6 +93,8 @@ public class MainActivity extends Activity implements View.OnClickListener {
         btnRead = (Button) findViewById(R.id.btnRead);
         btnDelete = (Button) findViewById(R.id.btnDelete);
         enterText = (EditText) findViewById(R.id.edit_text);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.setContentInsetsAbsolute(0, 0);
     }
 
     private void setOnClickListener(){
@@ -105,5 +112,4 @@ public class MainActivity extends Activity implements View.OnClickListener {
 
 
     }
-
 }
