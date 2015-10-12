@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import com.demo.develop.newtestapp.helper.DBHelper;
@@ -41,9 +42,14 @@ public class MainActivity extends Activity implements View.OnClickListener {
         Dao dao = new Dao(dbHelper);
         switch (v.getId()) {
             case R.id.save_button:
-                String text = enterText.getText().toString();
-                enterText.getText().clear();
-                dao.save(rating,text);
+                if(rating != 0) {
+                    String text = enterText.getText().toString();
+                    enterText.getText().clear();
+                    dao.save(rating, text);
+                }else {
+                    Toast.makeText(getApplicationContext(), "You didn't choose rating",
+                            Toast.LENGTH_LONG).show();
+                }
                 break;
             case R.id.btnRead:
                 dao.readAll();
@@ -67,7 +73,6 @@ public class MainActivity extends Activity implements View.OnClickListener {
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 
                     if (currentButton != null) {
-                        currentButton.setChecked(false);
                         rating =0;
                     }
                     currentButton = (ToggleButton) buttonView;
